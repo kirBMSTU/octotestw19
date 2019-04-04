@@ -11,6 +11,10 @@ class LettersSteps extends DefaultSteps {
 		this.page.openBySubject(subject);
 	}
 
+	openMetathreadByName(name) {
+		this.page.openMetathreadByName(name)
+	}
+
 }
 
 export default new LettersSteps();
