@@ -4,7 +4,7 @@ import layout from "../../../steps/layout.js";
 import main from "../../../steps/main.js";
 
 describe('Письма в категории умной сортировки Рассылки', () => {
-    it('Письмо с промоакцией находиться во вложенной папке Рассылки', () => {
+    it('Письмо с промоакцией находится во вложенной папке Рассылки', () => {
         main.open('https://mail.ru');
         main.login(process.env.LOGIN, process.env.PASSWORD);
         layout.setPaneAndSize(3);

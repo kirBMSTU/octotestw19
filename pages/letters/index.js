@@ -26,12 +26,13 @@ class LettersPage extends DefaultPage {
 	 * Проверяет есть ли письмо с темой
 	 *
 	 * @param {string} subject
+	 * @param {number|null} timeout - wait timeout in ms
 	 * @param {boolean} reverse
 	 * @returns {boolean}
 	 */
-	hasLetterBySubject (subject, reverse = false) {
+	hasLetterBySubject (subject, timeout = null, reverse = false) {
 		try {
-			this.page.waitForVisible(this.locators.letterBySubject(subject), null, reverse);
+			this.page.waitForVisible(this.locators.letterBySubject(subject), timeout, reverse);
 
 			return true;
 		} catch (err) {

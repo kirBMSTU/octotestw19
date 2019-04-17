@@ -3,15 +3,15 @@ import main from "../../../steps/main.js";
 import letters from "../../../steps/letters/index";
 import folders from "../../../steps/sidebar/folders.js";
 
-describe('Письма вне категорий умной сортировки', () => {
-    it('Проверить, что письмо от обычного пользователя не попало в "Рассылки", "Соцсети"', () => {
+describe('Письма в категории умной сортировки Рассылки', () => {
+    it('Письмо с рассылкой находится во вложенной папке Рассылки', () => {
         main.open('https://mail.ru');
         main.login(process.env.LOGIN, process.env.PASSWORD);
         layout.setPaneAndSize(3);
 
         folders.expandInboxFolder();
 
-        const subject = 'Насчет киношки';
+        const subject = 'Fwd: 3 ваших пина сохранены';
 
         folders.clickSubFolderByName('Социальные сети');
         letters.checkNotExistsBySubject(subject);
