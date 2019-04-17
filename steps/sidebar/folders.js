@@ -10,6 +10,13 @@ class FoldersSteps extends DefaultSteps {
 		this.page.clickFolderByName(folderName);
 	}
 
+	clickSubFolderByName(subFolderName) {
+		this.page.clickSubFolder(subFolderName);
+	}
+
+	expandInboxFolder() {
+		this.page.expandInboxFolder()
+	}
 }
 
 export default new FoldersSteps();

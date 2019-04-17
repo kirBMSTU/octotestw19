@@ -4,24 +4,21 @@ import {
 	socialFolderID,
 } from '../qaAtrrsConfig.js'
 
+
 class LettersPage extends DefaultPage {
 	constructor() {
 		super('letters')
 	}
 
 	get locators () {
-		const container = '[data-qa-id="dataset-letters"]';
-
+		const container = '//*[contains(@class,"letter-list")]//*[contains(@class,"dataset__items")]';
+		const letter = container + '//*[contains(@class,"js-letter-list-item")]';
+		const scrollableLetterList = '//*[contains(@class,"letter-list")]//*[contains(@class,"scrollable")]';
 		return {
 			container,
-			metathreadByID: (id) => {
-				return `${this.locators.container} [data-qa-id="metathread-item:folder:${id}"]`;
-			},
-			letterBySubject: (subject) => {
-				// subject = subject === '' ? '<Без темы>' : subject.replace('"', '\\"');
-
-				return `${this.locators.container} [data-qa-id="letter-item:subject:${subject}"]`;
-			}
+			metathreadByID: (id) => container + `//*[@data-metathread="${id}"]`,
+			letterBySubject: (subject) => letter + `[//*[contains(@class,"llct__subject")][@title="${subject}"]]`,
+			scrollableLetterList,
 		}
 	}
 

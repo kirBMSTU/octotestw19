@@ -10,7 +10,7 @@ class MainPageSteps extends DefaultSteps {
 		this.page.fillLoginForm(username, password);
 		this.page.submit();
 		this.page.waitForUrl('https://e.mail.ru/messages/inbox/?back=1&afterReload=1');
-		this.redirectToQa();
+		// this.redirectToQa();
 	}
 }
 

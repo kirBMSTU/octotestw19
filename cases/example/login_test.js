@@ -7,7 +7,7 @@ import letters from '../../steps/letters';
 describe('test id', () => {
 	it('Авторизоваться и открыть первое письмо на странице', () => {
 		main.open('https://mail.ru');
-		main.login('just_for_test@list.ru', 'QualityAssurance'); // так не надо )) - оки, потом исправлю))
+		main.login(process.env.LOGIN, process.env.PASSWORD);
 		layout.setPaneAndSize(3);
 		folders.clickFolderByName('Входящие');
 		letters.openBySubject('Как воспользоваться почтой с мобильного?'); // того письма почему-то нет в новом ящике

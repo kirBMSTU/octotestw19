@@ -1,6 +1,8 @@
 import DefaultSteps from '../default';
 import page from '../../pages/letters';
 
+var assert = require('assert');
+
 class LettersSteps extends DefaultSteps {
 	constructor() {
 		super(page);
@@ -13,6 +15,10 @@ class LettersSteps extends DefaultSteps {
 
 	openMetathreadByName(name) {
 		this.page.openMetathreadByName(name)
+	}
+
+	checkNotExistsBySubject(subject) {
+        assert.strictEqual(this.page.hasLetterBySubject(subject), false);
 	}
 
 }

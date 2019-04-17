@@ -6,13 +6,13 @@ class Layout extends DefaultPage {
 	}
 
 	get locators() {
-		const container = '[data-qa-id="application"]';
-		const sideBar = container + ' [data-qa-id="main"] [data-qa-id="sidebar"]';
-		const dropDown = sideBar + ' [data-qa-id="dropdown-settings"]';
-		const dropDownButton = dropDown + ' [data-qa-id="dropdown-button"]';
-		const dropDownList = dropDown + ' [data-qa-id="dropdown-list"]';
-		const layoutSwitch = dropDownList + ' [data-qa-id="layout-toggle"]';
-		const paneCheckbox = layoutSwitch + ' .b-checkbox';
+		const container = '//*[@class="application"]';
+		const sideBar = container + '//*[contains(@class,"sidebar-folders")]';
+		const dropDown = sideBar + '//*[contains(@class,"settings")]//*[contains(@class,"dropdown")]';
+		const dropDownButton = dropDown + '//*[contains(@class,"button2")][@title="Настройки" or @data-title="Настройки"]';
+		const dropDownList = dropDown + '//*[contains(@class,"dropdown__menu")]//*[contains(@class,"list")]';
+		const layoutSwitch = dropDownList + '//*[contains(@class,"list-item")][text()="Список писем с колонкой письма"]';
+		const paneCheckbox = layoutSwitch + '//*[contains(@class,"b-checkbox")][contains(@class,"js-checkbox")]';
 		return {
 			container,
 			sideBar,
@@ -34,7 +34,7 @@ class Layout extends DefaultPage {
 		this.toggleDropdownButton();
 		this.page.waitForVisible(this.locators.dropDownList);
 		
-		const is3pane = this.hasClass(this.locators.paneCheckbox, 'b-checkbox_checked')
+		const is3pane = this.hasClass(this.locators.paneCheckbox, 'b-checkbox_checked');
 
 		switch (pane) {
 			case 2:
