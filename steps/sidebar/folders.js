@@ -6,6 +6,10 @@ class FoldersSteps extends DefaultSteps {
 		super(page);
 	}
 
+	clickInbox() {
+		this.page.clickInbox();
+	}
+
 	clickFolderByName(folderName) {
 		this.page.clickFolderByName(folderName);
 	}
@@ -14,8 +18,13 @@ class FoldersSteps extends DefaultSteps {
 		this.page.clickSubFolder(subFolderName);
 	}
 
-	expandInboxFolder() {
-		this.page.expandInboxFolder()
+    /**
+     * Скрывает или раскрывает вложенные во "Входящие" папки
+     *
+     * @param {boolean} value - желаемое значение (true - открыто)
+     */
+	expandInboxFolder(value = true) {
+		this.page.expandInboxFolder(value)
 	}
 }
 

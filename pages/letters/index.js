@@ -51,11 +51,15 @@ class LettersPage extends DefaultPage {
 	openMetathreadByName (name) {
 		switch (name) {
 			case 'Рассылки':
-                this.page.click(this.locators.metathreadByID(distributionFolderID));
+				const distribution = this.locators.metathreadByID(distributionFolderID);
+				this.page.waitForVisible(distribution);
+                this.page.click(distribution);
                 break;
 			case 'Соцсети':
-				this.page.click(this.locators.metathreadByID(socialFolderID));
-				break
+                const social = this.locators.metathreadByID(socialFolderID);
+                this.page.waitForVisible(social);
+                this.page.click(social);
+				break;
 		}
 	}
 

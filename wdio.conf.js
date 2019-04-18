@@ -11,8 +11,8 @@ exports.config = {
 	port: 9515,
 	path: '/',
 	specs: [
-		// './cases/**/*.js',
-		'./cases/smart_sort/social/message_notify_test.js'
+		'./cases/**/*.js',
+		// './cases/smart_sort/social_test.js'
 	],
  
 	// ============

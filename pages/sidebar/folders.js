@@ -6,20 +6,19 @@ class FoldersPage extends DefaultPage {
 	}
 
 	get locators() {
-		const container = '//*[contains(@class,"nav-folders")]//*[contains(@class,"nav")]';
+		const container = '//div[@id="app-canvas"]//*[contains(@class,"nav-folders")]//*[contains(@class,"nav")]';
 		const folder = container + `//*[contains(@class,"nav__item")]`;
 		const folderByName = (folderName) =>  {
 			return folder + `[//*[contains(@class,"nav__folder-name__txt")][text()="${folderName}"]]`;
 		};
-        const subFolder = container + `//*[contains(@class, "nav__item_child")]`;
+        const subFolder = container + `//*[contains(@class, "nav__item_child")]/*/*`;
 
-        // промучался час, пытаясь выбрать не блок с названием подпапки,
-		// а именно весь блок папки, как это реализовано в folderByName
-		// но xpath усердно игнорирует всю часть со вложеными элементами.
-		// Именно на подпапках. Не смог разобраться с чем связано
         const subFolderByName = (subFolderName) => {
-        	return subFolder + `//*[@class="nav__folder-name__txt"][contains(text(),"${subFolderName}")]`;
+        	return subFolder + `//*[@class="nav__folder-name__txt"][contains(text(),"${subFolderName}")]/ancestor::*[contains(@class,"nav__item")]`;
         };
+
+        const inboxFolder = '//*[contains(@class,"nav__item") and @href="/inbox/"]';
+
         const expandButton = folderByName('Входящие') + `//*[contains(@class,"button2")]`;
         const expandButtonClosed = expandButton + `[@title="Развернуть" or @data-title="Развернуть"]`;
 
@@ -29,7 +28,19 @@ class FoldersPage extends DefaultPage {
 			expandButtonClosed,
 			folderByName,
 			subFolderByName,
+			inboxFolder,
 		}
+	}
+
+	// при открытии письма (видимо) происходит фокусировка на нем
+	// в результате почему-то не получается выбрать при помощи дочерних элементов папку
+	// тк data-qa-id не работает, то единственный выход - href у папки входящих
+	// используется этот метод там, где до этого было открыто письмо,
+	// в остальных случаях используется clickFolderByName
+	clickInbox() {
+        const locator = this.locators.inboxFolder;
+        this.page.waitForVisible(locator);
+        this.page.click(locator);
 	}
 
 	/**
@@ -38,9 +49,8 @@ class FoldersPage extends DefaultPage {
 	 */
 	clickFolderByName(folderName) {
 		const locator = this.locators.folderByName(folderName);
-		// browser.debug();
-		this.page.waitForVisible(locator);
-		this.page.click(locator);
+        this.page.waitForVisible(locator);
+        this.page.click(locator);
 	}
 
 	clickSubFolder(subFolderName) {
@@ -56,11 +66,11 @@ class FoldersPage extends DefaultPage {
 		return isClosed;
 	}
 
-	expandInboxFolder() {
+	expandInboxFolder(value) {
 		const isInboxClosed = this.isInboxClosed();
 
-		if (isInboxClosed) {
-			// раскрываем "Входящие" если они свернуты
+		if (isInboxClosed === value) {
+			// раскрываем "Входящие" если они свернуты и наоборот
             this.page.click(this.locators.expandButton);
         }
 	}
