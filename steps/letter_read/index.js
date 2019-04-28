@@ -7,14 +7,14 @@ class LetterReadSteps extends DefaultSteps {
     }
 
     pressForwardButton() {
-        this.page.pressForwardButton();
+        this.page.pressButtonByName('Переслать');
 
         // если есть черновик, то при нажатии на "Переслать" вылезет попап, на котором надо тыкнуть "Новое письмо"
         this.page.pressNewLetterButton();
     }
 
     pressDeleteButton() {
-        this.page.pressDeleteButton();
+        this.page.pressButtonByName('Удалить');
     }
 }
 

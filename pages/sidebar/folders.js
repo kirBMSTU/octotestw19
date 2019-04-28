@@ -38,7 +38,7 @@ class FoldersPage extends DefaultPage {
 	// используется этот метод там, где до этого было открыто письмо,
 	// в остальных случаях используется clickFolderByName
 	clickInbox() {
-        const locator = this.locators.inboxFolder;
+    	const locator = this.locators.inboxFolder;
         this.page.waitForVisible(locator);
         this.page.click(locator);
 	}

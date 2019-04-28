@@ -12,3 +12,8 @@ export default {
 		sizeXXL: 2560
 	}
 };
+
+export const foldersIDs = {
+	'Рассылки': 500013,
+	'Соцсети': 500011,
+};

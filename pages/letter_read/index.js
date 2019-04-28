@@ -14,12 +14,18 @@ class LetterReadPage extends DefaultPage {
         const layoutMainFrame = '//*[@class="layout__main-frame"]';
         const deleteButton = layoutMainFrame + '//*[contains(@class,"button2") and @title="Удалить"]';
 
+        const buttons = {
+            'Удалить': deleteButton,
+            'Переслать': forwardButton,
+        };
+
+        const buttonsByName = name => buttons[name];
+
         return {
             threadLetter,
-            forwardButton,
             layoutMainFrame,
-            deleteButton,
             newLetterButton,
+            buttonsByName,
         }
     }
 
@@ -40,14 +46,8 @@ class LetterReadPage extends DefaultPage {
         }
     }
 
-    pressForwardButton() {
-        const button = this.locators.forwardButton;
-        this.page.waitForVisible(button);
-        this.page.click(button);
-    }
-
-    pressDeleteButton() {
-        const button = this.locators.deleteButton;
+    pressButtonByName(name) {
+        const button = this.locators.buttonsByName(name);
         this.page.waitForVisible(button);
         this.page.click(button);
     }

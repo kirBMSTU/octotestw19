@@ -1,8 +1,5 @@
 import DefaultPage from '../default';
-import {
-	distributionFolderID,
-	socialFolderID,
-} from '../qaAtrrsConfig.js'
+import { foldersIDs } from "../../store";
 
 
 class LettersPage extends DefaultPage {
@@ -49,18 +46,10 @@ class LettersPage extends DefaultPage {
 	}
 
 	openMetathreadByName (name) {
-		switch (name) {
-			case 'Рассылки':
-				const distribution = this.locators.metathreadByID(distributionFolderID);
-				this.page.waitForVisible(distribution);
-                this.page.click(distribution);
-                break;
-			case 'Соцсети':
-                const social = this.locators.metathreadByID(socialFolderID);
-                this.page.waitForVisible(social);
-                this.page.click(social);
-				break;
-		}
+		const id = foldersIDs[name];
+        const locator = this.locators.metathreadByID(id);
+        this.page.waitForVisible(locator);
+        this.page.click(locator);
 	}
 
 }

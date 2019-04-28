@@ -18,11 +18,11 @@ class LettersSteps extends DefaultSteps {
 	}
 
 	checkNotExistsBySubject(subject) {
-        assert.ok(this.page.hasLetterBySubject(subject, 1000) === false, 'Letter not expected here!');
+        assert.ok(!this.page.hasLetterBySubject(subject, 1000), 'Letter not expected here!');
 	}
 
     checkExistsBySubject(subject) {
-        assert.ok(this.page.hasLetterBySubject(subject, 1000) === true, 'Letter expected here!');
+        assert.ok(this.page.hasLetterBySubject(subject, 1000), 'Letter expected here!');
     }
 
 }

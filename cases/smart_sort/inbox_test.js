@@ -36,6 +36,9 @@ describe('Письма вне категорий умной сортировки
 
         folders.clickSubFolderByName('Рассылки');
         letters.checkNotExistsBySubject(subject);
+
+        folders.clickFolderByName('Входящие');
+        letters.checkExistsBySubject(subject);
     });
 
     it('Проверить, что письмо с несколькими получателями находится во "Входящих"', () => {
@@ -51,6 +54,9 @@ describe('Письма вне категорий умной сортировки
 
         folders.clickSubFolderByName('Рассылки');
         letters.checkNotExistsBySubject(subject);
+
+        folders.clickFolderByName('Входящие');
+        letters.checkExistsBySubject(subject);
     });
 
     it('Проверить, что письмо-оповещение не попало в "Рассылки", "Соцсети"', () => {
@@ -61,5 +67,8 @@ describe('Письма вне категорий умной сортировки
 
         folders.clickSubFolderByName('Рассылки');
         letters.checkNotExistsBySubject(subject);
+
+        folders.clickFolderByName('Входящие');
+        letters.checkExistsBySubject(subject);
     });
 });

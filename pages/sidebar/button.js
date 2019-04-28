@@ -13,34 +13,36 @@ class SidebarButtonPage extends DefaultPage {
         const dropDownList = dropDown + '//*[contains(@class,"dropdown__menu")]//*[contains(@class,"list")]';
         const smartSortSwitch = dropDownList + '//*[contains(@class,"list-item")][text()="Умная сортировка писем"]';
         const smartSortCheckbox = smartSortSwitch + '//*[contains(@class,"b-checkbox")][contains(@class,"js-checkbox")]';
+
+        const buttons = {
+            'Настройки': dropDownButton,
+            'Умная сортировка': smartSortCheckbox,
+        };
+
+        const buttonByName = name => buttons[name];
+
         return {
             container,
             smartSortCheckbox,
-            dropDownButton,
+            buttonByName,
         }
     }
 
-    toggleSmartSortButton() {
-        const locator = this.locators.smartSortCheckbox;
+    toggleButtonByName(name) {
+        const locator = this.locators.buttonByName(name);
         this.page.waitForVisible(locator);
         this.page.click(locator);
     }
 
-    toggleDropdownButton() {
-        const button = this.locators.dropDownButton;
-        this.page.waitForVisible(button);
-        this.page.click(button);
-    }
-
     setSmartSort(value) {
-        this.toggleDropdownButton();
+        this.toggleButtonByName('Настройки');
         const isSmartSortEnabled = this.hasClass(this.locators.smartSortCheckbox, 'b-checkbox_checked');
 
         if(isSmartSortEnabled !== value) {
-            this.toggleSmartSortButton();
+            this.toggleButtonByName('Умная сортировка');
         }
 
-        this.toggleDropdownButton();
+        this.toggleButtonByName('Настройки');
     }
 
 }

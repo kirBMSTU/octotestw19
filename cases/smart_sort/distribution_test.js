@@ -12,7 +12,7 @@ describe('Письма в категории умной сортировки Р�
         layout.setPaneAndSize(3);
 
         settings.setSmartGrouping(true);
-        });
+    });
 
     after('Отключить умную сортировку', () => {
         settings.setSmartGrouping(false);
@@ -41,5 +41,4 @@ describe('Письма в категории умной сортировки Р�
         folders.clickSubFolderByName('Рассылки');
         letters.checkExistsBySubject('Вас ждут 18 новых пинов');
     });
-
 });
