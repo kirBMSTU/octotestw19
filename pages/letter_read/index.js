@@ -14,24 +14,19 @@ class LetterReadPage extends DefaultPage {
         const layoutMainFrame = '//*[@class="layout__main-frame"]';
         const deleteButton = layoutMainFrame + '//*[contains(@class,"button2") and @title="Удалить"]';
 
-        const buttons = {
-            'Удалить': deleteButton,
-            'Переслать': forwardButton,
-        };
-
-        const buttonsByName = name => buttons[name];
-
         return {
             threadLetter,
             layoutMainFrame,
             newLetterButton,
-            buttonsByName,
+            deleteButton,
+            forwardButton,
+            dropdown,
         }
     }
 
-    isNewLetterButtonVisible() {
+    isDropDownVisible() {
         try {
-            this.page.waitForVisible(this.locators.newLetterButton, 1000, false);
+            this.page.waitForVisible(this.locators.dropdown, 1000, false);
 
             return true;
         } catch (err) {
@@ -39,15 +34,14 @@ class LetterReadPage extends DefaultPage {
         }
     }
 
-    pressNewLetterButton() {
-        if (this.isNewLetterButtonVisible()) {
-            const locator = this.locators.newLetterButton;
-            this.page.click(locator);
-        }
-    }
-
     pressButtonByName(name) {
-        const button = this.locators.buttonsByName(name);
+        const buttons = {
+            'Удалить': this.locators.deleteButton,
+            'Переслать': this.locators.forwardButton,
+            'Новое письмо': this.locators.newLetterButton
+        };
+
+        const button = buttons[name];
         this.page.waitForVisible(button);
         this.page.click(button);
     }
